@@ -13,13 +13,39 @@ body.font-geist {
     .color-name,
     .color-value,
     button,
-    .mat-mdc-menu-item {
+    .mat-mdc-menu-item,
+    canvas,
+    .chart-js-render-monitor {
         letter-spacing: 0.01em;
+        font-family: var(--font-geist);
+    }
+
+    // Force Chart.js elements to use Geist
+    canvas {
+        font-family: var(--font-geist) !important;
     }
 }
 
 body.font-montserrat {
     letter-spacing: normal;
+
+    .mat-mdc-card-title,
+    .mat-mdc-card-subtitle,
+    .chart-title,
+    .color-name,
+    .color-value,
+    button,
+    .mat-mdc-menu-item,
+    canvas,
+    .chart-js-render-monitor {
+        letter-spacing: normal;
+        font-family: var(--font-montserrat);
+    }
+
+    // Force Chart.js elements to use Montserrat
+    canvas {
+        font-family: var(--font-montserrat) !important;
+    }
 }
 
 .navigation {

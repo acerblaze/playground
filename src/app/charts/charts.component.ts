@@ -1,4 +1,4 @@
-import { Component, signal, computed, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, signal, computed, ChangeDetectorRef, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,26 +19,70 @@ import { AnimatedNumberComponent } from '../animated-number/animated-number.comp
   templateUrl: './charts.component.html',
   styleUrl: './charts.component.scss'
 })
-export class ChartsComponent implements OnInit {
+export class ChartsComponent implements OnInit, AfterViewInit, OnDestroy {
   // Color intensity signal
   private colorIntensitySignal = signal<'300' | '500'>('300');
+
+  // Store event listeners for cleanup
+  private observers: MutationObserver[] = [];
+  private eventListeners: { event: string, handler: EventListener }[] = [];
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    // Apply current font to chart options
+    // Initial setup of chart fonts
     this.updateChartFonts();
 
-    // Listen for font changes
-    const observer = new MutationObserver(() => {
+    // Listen for font changes via body class
+    const bodyObserver = new MutationObserver(() => {
       this.updateChartFonts();
       this.cdr.detectChanges();
     });
 
     // Observe body class changes which indicate font changes
-    observer.observe(document.body, {
+    bodyObserver.observe(document.body, {
       attributes: true,
       attributeFilter: ['class']
+    });
+    this.observers.push(bodyObserver);
+
+    // Listen for custom font change event
+    const fontChangeHandler = (event: Event) => {
+      console.log('Font change event received');
+      setTimeout(() => {
+        this.updateChartFonts();
+        this.cdr.detectChanges();
+      }, 50);
+    };
+
+    document.addEventListener('fontChanged', fontChangeHandler as EventListener);
+    this.eventListeners.push({
+      event: 'fontChanged',
+      handler: fontChangeHandler as EventListener
+    });
+  }
+
+  ngAfterViewInit() {
+    // Apply fonts again after view is initialized to ensure charts render with correct font
+    setTimeout(() => {
+      this.updateChartFonts();
+      this.cdr.detectChanges();
+    }, 100);
+
+    // And once more after a longer delay to catch any late-rendered charts
+    setTimeout(() => {
+      this.updateChartFonts();
+      this.cdr.detectChanges();
+    }, 500);
+  }
+
+  ngOnDestroy() {
+    // Clean up observers
+    this.observers.forEach(observer => observer.disconnect());
+
+    // Clean up event listeners
+    this.eventListeners.forEach(({ event, handler }) => {
+      document.removeEventListener(event, handler);
     });
   }
 
@@ -47,6 +91,8 @@ export class ChartsComponent implements OnInit {
     const isGeist = document.body.classList.contains('font-geist');
     const fontFamily = isGeist ? 'Geist Sans' : 'Montserrat';
     const letterSpacing = isGeist ? '0.01em' : 'normal';
+
+    console.log('Updating chart fonts to:', fontFamily);
 
     // Update all chart options with the current font
     this.updateChartOptionFonts(this.lineChartOptionsSignal, fontFamily, letterSpacing);
@@ -91,6 +137,19 @@ export class ChartsComponent implements OnInit {
           newOptions.plugins.legend.labels.font = {};
         }
         newOptions.plugins.legend.labels.font.family = fontFamily;
+      }
+
+      // Update scale fonts
+      if (newOptions.scales) {
+        Object.keys(newOptions.scales).forEach(scaleKey => {
+          const scale = newOptions.scales[scaleKey];
+          if (scale.ticks && !scale.ticks.font) {
+            scale.ticks.font = {};
+          }
+          if (scale.ticks && scale.ticks.font) {
+            scale.ticks.font.family = fontFamily;
+          }
+        });
       }
 
       return newOptions;

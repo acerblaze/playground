@@ -1,4 +1,4 @@
-import { Component, signal, computed, OnInit } from '@angular/core';
+import { Component, signal, computed, OnInit, AfterViewInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { AnimatedNumberComponent } from './animated-number/animated-number.compo
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = signal('playground');
 
   // Font family signal
@@ -37,6 +37,19 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Initialize font family on component creation
     this.updateFontFamily();
+
+    // Check if there's a saved font preference
+    const savedFont = localStorage.getItem('preferredFont');
+    if (savedFont && (savedFont === 'montserrat' || savedFont === 'geist')) {
+      this.setFontFamily(savedFont);
+    }
+  }
+
+  ngAfterViewInit() {
+    // Apply font again after view is initialized to ensure all components render with correct font
+    setTimeout(() => {
+      this.updateFontFamily();
+    }, 0);
   }
 
   // Method to set font family
@@ -45,6 +58,9 @@ export class AppComponent implements OnInit {
 
     this.fontFamilySignal.set(family);
     this.updateFontFamily();
+
+    // Save preference
+    localStorage.setItem('preferredFont', family);
   }
 
   // Method to update font family
@@ -52,6 +68,8 @@ export class AppComponent implements OnInit {
     const family = this.fontFamilySignal();
     const fontVar = family === 'montserrat' ? '--font-montserrat' : '--font-geist';
     const letterSpacing = family === 'geist' ? '0.01em' : 'normal';
+
+    console.log('Setting font family to:', family);
 
     // Update the CSS variable for the primary font
     document.documentElement.style.setProperty('--font-primary', `var(${fontVar})`);
@@ -63,6 +81,11 @@ export class AppComponent implements OnInit {
     // Add a class to the body to allow specific styling based on font
     document.body.classList.remove('font-montserrat', 'font-geist');
     document.body.classList.add(`font-${family}`);
+
+    // Dispatch a custom event that other components can listen for
+    document.dispatchEvent(new CustomEvent('fontChanged', {
+      detail: { family, fontVar, letterSpacing }
+    }));
   }
 
   // Animated number value
