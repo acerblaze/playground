@@ -1,0 +1,16 @@
+<h1 class="page-title">Brand Color Palette</h1>
+
+<div class="color-palette-container">
+    <div class="color-group" *ngFor="let group of orderedColorGroups">
+        <h2>{{ group.name }}</h2>
+        <div class="color-grid">
+            <div class="color-card" *ngFor="let color of group.colors" [style.background-color]="color.value"
+                [style.color]="color.textColor">
+                <div class="color-info">
+                    <div class="color-name">{{ color.name }}</div>
+                    <div class="color-value">{{ color.value }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

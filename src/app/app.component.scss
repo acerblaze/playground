@@ -1,0 +1,187 @@
+// Global font styles
+:root {
+    font-family: var(--font-primary);
+}
+
+// Font-specific styles
+body.font-geist {
+    letter-spacing: 0.01em;
+
+    .mat-mdc-card-title,
+    .mat-mdc-card-subtitle,
+    .chart-title,
+    .color-name,
+    .color-value,
+    button,
+    .mat-mdc-menu-item {
+        letter-spacing: 0.01em;
+    }
+}
+
+body.font-montserrat {
+    letter-spacing: normal;
+}
+
+.navigation {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 24, 75, 0.15);
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: var(--chart-teal-300);
+            border-radius: 4px;
+        }
+    }
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+
+        a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.2s ease;
+            font-weight: 500;
+
+            &:hover {
+                color: var(--chart-teal-300);
+            }
+
+            &.active {
+                color: var(--chart-teal-300);
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background-color: var(--chart-teal-300);
+                    border-radius: 1.5px;
+                }
+            }
+        }
+    }
+
+    .font-picker {
+        position: relative;
+
+        .font-menu-trigger {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 0.25rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+}
+
+// Custom styles for the font menu (these will be applied globally)
+::ng-deep .font-menu {
+    .mat-mdc-menu-content {
+        padding: 0;
+    }
+
+    .mat-mdc-menu-item {
+        height: 40px;
+
+        &.active {
+            background-color: rgba(0, 113, 235, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        &.montserrat-option {
+            font-family: var(--font-montserrat);
+        }
+
+        &.geist-option {
+            font-family: var(--font-geist);
+        }
+    }
+}
+
+main {
+    width: 100%;
+    min-height: calc(100vh - 70px); // Adjust for nav height
+    padding: 2rem;
+    box-sizing: border-box;
+    background-color: var(--neutral-50);
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.chart-card {
+    width: 100%;
+    height: 100%;
+}
+
+mat-card-content {
+    padding: 1rem;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Responsive adjustments
+@media (max-width: 900px) {
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.number-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}

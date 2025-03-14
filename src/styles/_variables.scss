@@ -1,0 +1,92 @@
+// Semantic colors
+$primary: #00184B; // Dark blue from brand
+$secondary: #00BCFF; // Light blue from brand
+$background: #FFFFFF;
+$text-dark: #1a2a4a;
+$text-light: #FFFFFF;
+
+// Brand Colors
+$blue-900: #00184B; // Dark blue from brand
+$blue-800: #001e5f;
+$blue-700: #002573;
+$blue-600: #002c87;
+$blue-500: #00339b;
+$blue-400: #0052c3;
+$blue-300: #0071eb;
+$blue-200: #0096ff;
+$blue-100: #00BCFF; // Light blue from brand
+
+// Additional brand colors
+$white: #FFFFFF;
+
+// Neutral colors (based on blue)
+$neutral-900: #1a2a4a;
+$neutral-800: #2c3a57;
+$neutral-700: #3d4a64;
+$neutral-600: #4f5a71;
+$neutral-500: #616a7e;
+$neutral-400: #838b9a;
+$neutral-300: #a5abb6;
+$neutral-200: #c7cbd2;
+$neutral-100: #e9eaee;
+$neutral-50: #f4f5f7;
+
+// Chart color palette - complementary to brand blues
+$chart-teal-500: #00a3b4;
+$chart-teal-300: #33d6e8;
+$chart-purple-500: #6b46c1;
+$chart-purple-300: #9f7aea;
+$chart-green-500: #38a169;
+$chart-green-300: #68d391;
+$chart-orange-500: #dd6b20;
+$chart-orange-300: #f6ad55;
+$chart-red-500: #e53e3e;
+$chart-red-300: #fc8181;
+
+// Export as CSS variables for use in components
+:root {
+    // Semantic colors
+    --primary: #{$primary};
+    --secondary: #{$secondary};
+    --background: #{$background};
+    --text-dark: #{$text-dark};
+    --text-light: #{$text-light};
+
+    // Brand blues
+    --blue-900: #{$blue-900};
+    --blue-800: #{$blue-800};
+    --blue-700: #{$blue-700};
+    --blue-600: #{$blue-600};
+    --blue-500: #{$blue-500};
+    --blue-400: #{$blue-400};
+    --blue-300: #{$blue-300};
+    --blue-200: #{$blue-200};
+    --blue-100: #{$blue-100};
+
+    // White
+    --white: #{$white};
+
+    // Neutrals
+    --neutral-900: #{$neutral-900};
+    --neutral-800: #{$neutral-800};
+    --neutral-700: #{$neutral-700};
+    --neutral-600: #{$neutral-600};
+    --neutral-500: #{$neutral-500};
+    --neutral-400: #{$neutral-400};
+    --neutral-300: #{$neutral-300};
+    --neutral-200: #{$neutral-200};
+    --neutral-100: #{$neutral-100};
+    --neutral-50: #{$neutral-50};
+
+    // Chart colors
+    --chart-teal-500: #{$chart-teal-500};
+    --chart-teal-300: #{$chart-teal-300};
+    --chart-purple-500: #{$chart-purple-500};
+    --chart-purple-300: #{$chart-purple-300};
+    --chart-green-500: #{$chart-green-500};
+    --chart-green-300: #{$chart-green-300};
+    --chart-orange-500: #{$chart-orange-500};
+    --chart-orange-300: #{$chart-orange-300};
+    --chart-red-500: #{$chart-red-500};
+    --chart-red-300: #{$chart-red-300};
+}

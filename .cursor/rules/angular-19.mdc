@@ -1,0 +1,76 @@
+---
+description: This document outlines the coding guidelines and best practices for Angular 19 projects. It covers the use of new signals APIs, resource fetching methods, recommended libraries, and strict coding rules to ensure performance, readability, and maintainability.
+globs: 
+alwaysApply: false
+---
+## 1. Angular 19 & Signals
+
+### 1.1 New Signals API
+- **Signals Usage:**  
+  - Adopt Angular’s signals for state management (writable signals, computed signals, and effects).
+  - Replace legacy decorators such as `@ViewChild`, `@Input`, etc., with their signal-based counterparts.
+  - Utilize new functionalities like `linkedSignal` and `model` to improve component interaction.
+
+### 1.2 Signal-Based Resource Fetching
+- **Resource Methods:**
+  - Use `resource` and `rxResource` for fetching data.
+  - Experiment with `httpResource` (currently experimental) for HTTP requests.
+
+---
+
+## 2. Libraries & Tools
+
+### 2.1 Charts
+- Use **ng2-charts** (a wrapper for Chart.js) and **Chart.js** for implementing charts.
+
+### 2.2 Tables
+- Implement tables with **AG Grid Community Edition**.
+
+### 2.3 State Management
+- For handling complex state, adopt **NGRX Signal Store**.
+
+### 2.4 UI Components
+- Familiarize yourself with **Angular Materials** and **Angular CDK** for advanced UI customizations.
+- Leverage Google’s improved Materials component customization features where needed.
+
+---
+
+## 3. Coding Guidelines
+
+### 3.1 Code Style & Linting
+- Adhere strictly to the configurations in:
+  - `.editorconfig`
+
+### 3.2 Function and Method Constraints
+- **Parameters:** No function or method should have more than **4 parameters**.
+- **Length:** Functions should not exceed **50 executable lines**.
+
+### 3.3 Line Length & Nesting
+- **Line Length:** Keep each line under **80 characters**.
+- **Nesting:** Do not nest code more than **2 levels deep**.
+
+### 3.4 Imports & Naming
+- Always include all required imports.
+- Use clear and consistent naming conventions for components, modules, and functions.
+
+### 3.5 Documentation
+- Retain JSDoc comments when refactoring code.
+- Keep documentation concise and to the point.
+
+---
+
+## 4. Project Structure & File Organization
+
+### 4.1 Overall Best Practices
+- Write code that is correct, up-to-date, bug-free, fully functional, and maintainable.
+- Prioritize performance, readability, and maintainability in every module.
+- Always double-check your work before committing changes.
+- Ensure tests are clear, concise, and aligned with the project’s coding standards.
+
+---
+
+## 5. Final Notes
+
+- If you need further clarification or encounter a rule that seems ambiguous, please ask for more details.
+- These guidelines serve as a living document; they may be updated as Angular evolves and as new best practices emerge.
+- Remain concise, minimize extraneous prose, and never invent rules—if you’re unsure, ask instead.

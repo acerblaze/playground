@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use './styles/variables' as *;
+
+// Import Montserrat font from Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+// Import Geist Sans font
+@import "@fontsource/geist-sans";
+
+// Define font variables
+:root {
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-geist: 'Geist Sans', sans-serif;
+  --font-primary: var(--font-montserrat); // Default font
+}
+
+html {
+  @include mat.theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Montserrat,
+      density: 0,
+    ));
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  color: var(--text-dark);
+  background-color: var(--background);
+}
+
+// Apply primary font to all headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+}
+
+// Apply primary font to all buttons and inputs
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-primary);
+}
+
+:root {
+  @include mat.card-overrides((subtitle-text-color: var(--neutral-500),
+      outlined-container-color: white,
+      outlined-outline-color: var(--neutral-200),
+      outlined-container-shape: 8px,
+      outlined-container-elevation: 0,
+    ));
+
+  .mat-mdc-card {
+    box-shadow: 0 1px 3px 0 rgba(0, 24, 75, 0.05), 0 1px 2px 0 rgba(0, 24, 75, 0.1) !important;
+  }
+
+  // Override button colors
+  .mat-mdc-raised-button.mat-primary {
+    background-color: var(--blue-300);
+  }
+
+  .mat-mdc-raised-button.mat-accent {
+    background-color: var(--chart-teal-300);
+  }
+
+  .mat-mdc-raised-button.mat-warn {
+    background-color: var(--chart-purple-300);
+  }
+
+  // Override chart title styles
+  .chartjs-title {
+    color: var(--primary) !important;
+    font-weight: 500 !important;
+    font-family: var(--font-primary) !important;
+  }
+
+  .chartjs-subtitle {
+    color: var(--neutral-500) !important;
+    font-family: var(--font-primary) !important;
+  }
+}

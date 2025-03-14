@@ -1,0 +1,94 @@
+<h1 class="page-title">Chart Examples</h1>
+
+<!-- Simplified Color Picker -->
+<div class="color-picker-container">
+    <div class="color-picker">
+        <button mat-raised-button [class.active]="colorIntensity() === '300'" (click)="setColorIntensity('300')">
+            Light Colors (-300)
+        </button>
+        <button mat-raised-button [class.active]="colorIntensity() === '500'" (click)="setColorIntensity('500')">
+            Dark Colors (-500)
+        </button>
+    </div>
+</div>
+
+<div class="chart-grid">
+    <!-- Bar Chart -->
+    <mat-card appearance="outlined" class="chart-card">
+        <mat-card-header>
+            <mat-card-title>
+                Bar Chart Example
+            </mat-card-title>
+            <mat-card-subtitle>
+                A simple bar chart example using ng2-charts.
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas baseChart [data]="barChartData()" [options]="barChartOptions()" [type]="'bar'"> </canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Line Chart -->
+    <mat-card appearance="outlined" class="chart-card">
+        <mat-card-header>
+            <mat-card-title>
+                Line Chart Example
+            </mat-card-title>
+            <mat-card-subtitle>
+                A simple line chart example using ng2-charts.
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas baseChart [data]="lineChartData()" [options]="lineChartOptions()" [type]="'line'"> </canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Pie Chart -->
+    <mat-card appearance="outlined" class="chart-card">
+        <mat-card-header>
+            <mat-card-title>
+                Pie Chart Example
+            </mat-card-title>
+            <mat-card-subtitle>
+                A simple pie chart example using ng2-charts.
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas baseChart [data]="pieChartData()" [options]="pieChartOptions()" [type]="'pie'"> </canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Radar Chart -->
+    <mat-card appearance="outlined" class="chart-card">
+        <mat-card-header>
+            <mat-card-title>
+                Radar Chart Example
+            </mat-card-title>
+            <mat-card-subtitle>
+                A simple radar chart example using ng2-charts.
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas baseChart [data]="radarChartData()" [options]="radarChartOptions()" [type]="'radar'"> </canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Animated Number Card -->
+    <mat-card appearance="outlined" class="chart-card">
+        <mat-card-header>
+            <mat-card-title>
+                Animated Number Example
+            </mat-card-title>
+            <mat-card-subtitle>
+                A number animation using number-flow library.
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <app-animated-number [value]="currentValue()" prefix="$" suffix="+" [duration]="1500" format="0,0">
+            </app-animated-number>
+            <div class="number-controls">
+                <button mat-raised-button color="primary" (click)="randomizeValue()">Randomize</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
